@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/index.css" />
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="js/js.js"></script>
+</head>
+
+<body>
+    <section class="todoapp">
+        <div>
+            <header class="header">
+                <h1>todos</h1><input class="new-todo" placeholder="What needs to be done?">
+            </header>
+            <section class="main">
+                <input id="toggle-all" class="toggle-all" type="checkbox">
+                <label for="toggle-all">Mark all as complete</label>
+                <ul class="todo-list">
+                    <li>
+                        <div class="view">
+                            <input class="toggle" type="checkbox">
+                            <label>Изучить DOM</label>
+                            <button class="destroy"></button>
+                        </div>
+                        <input class="edit" value="Изучить DOM">
+                    </li>
+                    <li>
+                        <div class="view"><input class="toggle" type="checkbox">
+                            <label>Изучить события JS</label>
+                            <button class="destroy"></button>
+                        </div>
+                        <input class="edit" value="Изучить события JS">
+                    </li>
+                    <li>
+                        <div class="view">
+                            <input class="toggle" type="checkbox"><label>Сделать домашнее задание</label>
+                            <button class="destroy"></button>
+                        </div>
+                        <input class="edit" value="Сделать домашнее задание">
+                    </li>
+                </ul>
+    </section>
+    <footer class="footer">
+        <span class="todo-count"><strong>3</strong>
+            <span>items</span>
+            <span>left</span></span>
+        <ul class="filters">
+            <li><a href="#" class="selected">All</a></li>
+            <li><a href="#" class="">Active</a></li>
+            <li><a href="#" class="">Completed</a></li>
+        </ul>
+    </footer>
+    </div>
+    </section>
+</body>
+</body>
+
+</html>
