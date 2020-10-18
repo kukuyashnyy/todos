@@ -1,5 +1,7 @@
-$(document).ready( function () {
+$(document).ready(function () {
+    readList();
     taskCounter();
+    toggleCheckBox();
 
     $('input').keyup(function (e) {
         if (e.key === "Enter") {
@@ -7,16 +9,19 @@ $(document).ready( function () {
             e.target.value = '';
         }
         taskCounter();
+        writeList();
     });
 
     $('ul').on("click", "[type=checkbox]", function () {
         completeTask($(this).parent().parent());
         taskCounter();
+        writeList();
     })
 
     $('ul').on("click", "button.destroy", function () {
         $(this).parents()[1].remove();
         taskCounter();
+        writeList();
     })
 
     $('section.main').on("click", "#toggle-all", function (e) {
@@ -24,7 +29,8 @@ $(document).ready( function () {
             completeTask($(this));
         });
         toggleCheckBox();
-        });
+        writeList();
+    });
 
     $('ul.filters').on("click", "li", function () {
         $('footer > ul > li').each(function () {
@@ -37,25 +43,38 @@ $(document).ready( function () {
     })
 });
 
+const writeList = function () {
+    localStorage['list'] = $('ul.todo-list').html();
+}
+
+const readList = function () {
+    if (localStorage['list'] === undefined) {
+        localStorage['list'] = String();
+    } else {
+        $('ul.todo-list').append(localStorage['list']);
+    }
+    toggleCheckBox();
+}
+
 const showList = function (e) {
     switch (e) {
         case "All":
             $('ul.todo-list > li').each(function () {
                 $(this).removeClass('hidden');
-            })
+            });
             break;
         case"Active":
             $('ul.todo-list > li').each(function () {
-                if ($(this).attr('class') !== "completed label") {
+                if (!($(this).hasClass("completed label"))) {
                     $(this).removeClass('hidden');
                 } else {
                     $(this).addClass('hidden');
                 }
-            })
+            });
             break;
         case "Completed":
             $('ul.todo-list > li').each(function () {
-                if ($(this).attr('class') === "completed label") {
+                if ($(this).hasClass("completed label")) {
                     $(this).removeClass('hidden');
                 } else {
                     $(this).addClass('hidden');
@@ -63,10 +82,6 @@ const showList = function (e) {
             })
             break;
     }
-    console.log("///");
-    $('ul.todo-list > li').each(function () {
-        console.log($(this).attr('class'));
-    });
 }
 
 const addTask = function (text) {
@@ -94,10 +109,10 @@ const taskCounter = function () {
 
 const toggleCheckBox = function () {
     $('ul.todo-list > li').each(function () {
-        if ($(this).attr('class') === "completed label") {
-            $('input.toggle').prop('checked', true);
+        if ($(this).hasClass("completed label")) {
+            $(this).children().children().prop('checked', true);
         } else {
-            $('input.toggle').prop('checked', false);
+            $(this).children().children().prop('checked', false);
         }
     });
 }
